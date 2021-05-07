@@ -59,11 +59,17 @@ public class User {
         this.birthdate = birthdate;
     }
 
-    public boolean isValid(User user){
-        LocalDate currentDate = LocalDate.now();
-        if(user.getEmail() == null || user.getLastname() == null || user.getFirstname() == null || getBirthdate() == null ){
+    public boolean isValid(){
+        if(
+                this.firstname != null &&
+                this.lastname != null &&
+                this.password != null && this.password.length() <= 40 && this.password.length() >= 8 &&
+                this.birthdate != null && this.birthdate.isBefore(LocalDate.now().minusYears(13))
+                //TODO check email regex
+        ){
+            return true;
+        }else{
             return false;
         }
-        return Period.between(user.birthdate, currentDate).getYears() >= 13;
     }
 }
