@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.regex.Pattern;
 
 public class User {
     String email;
@@ -59,17 +60,17 @@ public class User {
         this.birthdate = birthdate;
     }
 
+    public boolean emailValid(){
+        return Pattern.matches("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,6}$", this.email) ;
+
+    }
+
     public boolean isValid(){
-        if(
-                this.firstname != null &&
+        //TODO check email regex
+        return this.firstname != null &&
                 this.lastname != null &&
                 this.password != null && this.password.length() <= 40 && this.password.length() >= 8 &&
-                this.birthdate != null && this.birthdate.isBefore(LocalDate.now().minusYears(13))
-                //TODO check email regex
-        ){
-            return true;
-        }else{
-            return false;
-        }
+                this.birthdate != null && this.birthdate.isBefore(LocalDate.now().minusYears(13)) &&
+                this.email != null && this.emailValid();
     }
 }
