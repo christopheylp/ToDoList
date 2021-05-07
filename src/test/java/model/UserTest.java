@@ -20,8 +20,9 @@ public class UserTest extends TestCase {
     }
     @Test
     public void testEmailWithoutAtMark(){
-        user.email = "abc.gmail.com";
-        assertFalse(user.emailValid());
+        //TODO user.email only
+        User user1 = new User("abc.gmail.com", "Bob", "Joe", "12345678", LocalDate.now().minusYears(20));
+        assertFalse(user1.emailValid());
     }
 
     @Test
