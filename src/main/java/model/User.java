@@ -9,6 +9,7 @@ public class User {
     String firstname;
     String password;
     LocalDate birthdate;
+    Item assigned;
 
     public User(String email, String lastname, String firstname, String password, LocalDate birthdate) {
         this.email = email;
@@ -17,7 +18,6 @@ public class User {
         this.password = password;
         this.birthdate = birthdate;
     }
-
 
     public String getEmail() {
         return email;
@@ -59,6 +59,14 @@ public class User {
         this.birthdate = birthdate;
     }
 
+    public Item getAssigned() {
+        return assigned;
+    }
+
+    public void setAssigned(Item assigned) {
+        this.assigned = assigned;
+    }
+
     public boolean isValid(){
         if(
                 this.firstname != null &&
@@ -72,4 +80,5 @@ public class User {
             return false;
         }
     }
+
 }
