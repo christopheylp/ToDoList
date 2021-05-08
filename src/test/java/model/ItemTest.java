@@ -35,6 +35,7 @@ public class ItemTest extends TestCase {
         String str = "";
         for(int i=0; i<1200;i++) str += "a";
         Item itemTest = new Item("item1", str);
+        assertTrue(str.length() > 1000);
         assertTrue(itemTest.content.length() <= 1000);
     }
 }
