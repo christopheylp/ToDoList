@@ -20,15 +20,12 @@ public class Item {
         this.assigned = assigned;
     }
 
-    public boolean verifAssigned(User user){
-        if(this.assigned != null){
-            return true;
-        }
-        return false;
+    public boolean verifAssigned(){
+        return this.assigned != null;
     }
 
     public User addAssignement(User user){
-        if(!verifAssigned(user)){
+        if(!verifAssigned()){
             user.setAssigned(this);
             this.assigned = user;
         }

@@ -1,6 +1,8 @@
 package model;
 
 import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.jupiter.api.BeforeEach;
 import org.testng.annotations.Test;
 
 import java.time.LocalDate;
@@ -11,9 +13,11 @@ public class ItemTest extends TestCase {
     Item item = new Item("item1", "desc1");
     TodoList todo = new TodoList(user);
 
+
     @Test
     public void testVerifAssigned() {
-        assertFalse(item.verifAssigned(user));
+        item.assigned =  null;
+        assertFalse(item.verifAssigned());
     }
 
     @Test
