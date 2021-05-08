@@ -1,11 +1,9 @@
 package model;
 
 import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.jupiter.api.BeforeEach;
-import org.testng.annotations.Test;
-
+import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
+
 
 public class ItemTest extends TestCase {
 
@@ -29,6 +27,12 @@ public class ItemTest extends TestCase {
 
     @Test
     public void testAddInTodo() {
-        assertEquals(item.addInTodo(todo),todo.items);
+        assertTrue(todo.addItem(item));
+    }
+
+    @Test
+    public void testContentIsLessThan1000(){
+
+        assertTrue(item.content.length() < 1000);
     }
 }

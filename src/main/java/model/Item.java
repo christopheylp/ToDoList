@@ -1,15 +1,13 @@
 package model;
 
-import java.util.ArrayList;
-
 public class Item {
     String name;
-    String description;
+    String content;
     User assigned;
 
-    public Item(String name, String description) {
+    public Item(String name, String content) {
         this.name = name;
-        this.description = description;
+        this.content = content;
     }
 
     public User getAssigned() {
@@ -24,15 +22,14 @@ public class Item {
         return this.assigned != null;
     }
 
-    public User addAssignement(User user){
+    public void addAssignement(User user){
         if(!verifAssigned()){
             user.setAssigned(this);
             this.assigned = user;
         }
-        return user;
     }
 
-    public ArrayList<Item> addInTodo(TodoList todo){
+    public boolean addInTodo(TodoList todo){
         return todo.addItem(this);
     }
 

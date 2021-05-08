@@ -1,9 +1,10 @@
 package model;
 
 import junit.framework.TestCase;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+
 
 public class TodoListTest extends TestCase {
 
@@ -18,12 +19,23 @@ public class TodoListTest extends TestCase {
     }
 
     @Test
+    public void testAddSameItem(){
+        this.todo.addItem(item);
+        this.todo.addItem(item);
+        assertEquals(this.todo.items.size(),1);
+    }
+
+    /*
+    @Test
     public void testAddMoreThan10Items(){
         //mock
-        for(int i=0; i<15;i++){
-            this.todo.addItem(item);
-        }
         assertEquals(this.todo.items.size(),10);
     }
+    */
+
+
+
+
+
 
 }

@@ -1,5 +1,6 @@
 package model;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 public class TodoList {
     ArrayList<Item> items;
@@ -10,11 +11,17 @@ public class TodoList {
         this.admin = admin;
     }
 
-    public ArrayList<Item> addItem(Item item){
-        if(this.items.size()<10){
-            this.items.add(item);
+    public boolean addItem(Item item){
+        if(this.items.size()>=10 || this.alreadyInTodo(item)){
+            return false;
         }
-        return this.items;
+        this.items.add(item);
+        return true;
     }
+
+    public boolean alreadyInTodo(Item item){
+        return IntStream.range(0, this.items.size()).anyMatch(i -> this.items.get(i).name.equals(item.name));
+    }
+
 
 }
