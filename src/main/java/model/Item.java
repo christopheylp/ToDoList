@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Item {
     String name;
     String description;
@@ -28,8 +30,13 @@ public class Item {
     public User addAssignement(User user){
         if(!verifAssigned(user)){
             user.setAssigned(this);
+            this.assigned = user;
         }
         return user;
+    }
+
+    public ArrayList<Item> addInTodo(TodoList todo){
+        return todo.addItem(this);
     }
 
 }
