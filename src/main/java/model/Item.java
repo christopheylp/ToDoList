@@ -7,7 +7,7 @@ public class Item {
 
     public Item(String name, String content) {
         this.name = name;
-        this.content = content;
+        this.content = content.length() > 1000 ? content.substring(0, 1000) : content;
     }
 
     public User getAssigned() {
