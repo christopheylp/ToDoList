@@ -33,9 +33,7 @@ public class ItemTest extends TestCase {
     @Test
     public void testContentIsLessThan1000(){
         String str = "";
-        for(int i=0; i<1200;i++){
-            str+="a";
-        }
+        for(int i=0; i<1200;i++) str += "a";
         Item itemTest = new Item("item1", str);
         assertTrue(itemTest.content.length() <= 1000);
     }
