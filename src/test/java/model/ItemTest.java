@@ -1,7 +1,7 @@
 package model;
 
 import junit.framework.TestCase;
-import org.junit.Test;
+import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 
@@ -13,7 +13,7 @@ public class ItemTest extends TestCase {
 
     @Test
     public void testVerifAssigned() {
-        assertEquals(false,item.verifAssigned(user));
+        assertFalse(item.verifAssigned(user));
     }
 
     @Test
