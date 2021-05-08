@@ -27,6 +27,8 @@ public class TodoListTest extends TestCase {
 
     public void testVerifyLastInputItem() {
         assertTrue(todo.verifyLastInputItem());
+        this.todo.addItem(item);
+        assertFalse(todo.verifyLastInputItem());
     }
 
     /*
