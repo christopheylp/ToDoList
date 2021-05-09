@@ -10,8 +10,11 @@ public class TodoList {
     LocalDateTime lastInputItem = LocalDateTime.of(2021, 5, 8, 0, 0);    ;
 
     public TodoList(User admin) {
-        this.items = new ArrayList<Item>();
-        this.admin = admin;
+        if(admin.isValid()){
+            this.items = new ArrayList<Item>();
+            this.admin = admin;
+        }
+
     }
 
     public boolean addItem(Item item){
@@ -43,10 +46,12 @@ public class TodoList {
         return diff >= 30;
     }
 
-    public void isThere8Items(){
+    public boolean isThere8Items(){
         if( this.items.size() == 8){
             EmailSenderService.sendEmail();
+            return true;
         }
+        return false;
     }
 
 

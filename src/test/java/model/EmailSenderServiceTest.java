@@ -16,7 +16,6 @@ class EmailSenderServiceTest {
         Item item = new Item("item1", "desc1");
         TodoList todo = new TodoList(user);
 
-
-        assertTrue(EmailSenderService.sendEmail());
+        assertFalse(EmailSenderService.sendEmail());
     }
 }

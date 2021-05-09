@@ -2,21 +2,20 @@ package model;
 
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import java.time.LocalDate;
+import java.util.stream.IntStream;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
 
 public class TodoListTest extends TestCase {
 
-    User user = new User("abc@gmail.com", "Bob", "Joe", "123",LocalDate.now().minusYears(20));
+    User user = new User("abc@gmail.com", "Bob", "Joe", "123456789",LocalDate.now().minusYears(20));
     Item item = new Item("item1", "desc1");
     TodoList todo = new TodoList(user);
 
-    @Mock
-    TodoList todoTest = new TodoList(user);
+    private final TodoList todoListMocked = mock(TodoList.class);
 
     @Test
     public void testAddItem() {
@@ -40,15 +39,13 @@ public class TodoListTest extends TestCase {
 
     @Test
     public void testAddMoreThan10Items(){
-        for(int i=0;i<12;i++){
-            this.todo.addItemWithoutTime(new Item("item"+i,"content"+i));
-        }
+        IntStream.range(0, 12).forEach(i -> this.todo.addItemWithoutTime(new Item("item" + i, "content" + i)));
         assertEquals(this.todo.items.size(),10);
     }
 
     @Test
     public void testSendEmailWhenThereIs8Items(){
-        when(todoTest.isThere8Items()).thenReturn(EmailSenderService.sendEmail());
+        when(todoListMocked.isThere8Items()).thenReturn(EmailSenderService.sendEmail());
     }
 
 }
