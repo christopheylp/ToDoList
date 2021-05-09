@@ -11,7 +11,6 @@ import static org.mockito.Mockito.when;
 
 public class TodoListTest extends TestCase {
 
-
     User user = new User("abc@gmail.com", "Bob", "Joe", "123",LocalDate.now().minusYears(20));
     Item item = new Item("item1", "desc1");
     TodoList todo = new TodoList(user);
@@ -21,14 +20,14 @@ public class TodoListTest extends TestCase {
 
     @Test
     public void testAddItem() {
-        this.todo.addItem(item);
+        this.todo.addItemWithoutTime(item);
         assertEquals(this.todo.items.size(),1);
     }
 
     @Test
     public void testAddSameItem(){
-        this.todo.addItem(item);
-        this.todo.addItem(item);
+        this.todo.addItemWithoutTime(item);
+        this.todo.addItemWithoutTime(item);
         assertEquals(this.todo.items.size(),1);
     }
 
@@ -39,12 +38,12 @@ public class TodoListTest extends TestCase {
         assertFalse(todo.verifyLastInputItem());
     }
 
-
     @Test
     public void testAddMoreThan10Items(){
-        //TODO add 10 items
-        this.todo.addItem(item);
-        assertTrue(todo.items.size() < 10);
+        for(int i=0;i<12;i++){
+            this.todo.addItemWithoutTime(new Item("item"+i,"content"+i));
+        }
+        assertEquals(this.todo.items.size(),10);
     }
 
     @Test

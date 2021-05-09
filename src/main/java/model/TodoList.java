@@ -24,6 +24,15 @@ public class TodoList {
         return true;
     }
 
+    public boolean addItemWithoutTime(Item item){
+        if(this.items.size()>=10 || this.alreadyInTodo(item)){
+            return false;
+        }
+        this.items.add(item);
+        this.lastInputItem = LocalDateTime.now();
+        return true;
+    }
+
     public boolean alreadyInTodo(Item item){
         return IntStream.range(0, this.items.size()).anyMatch(i -> this.items.get(i).name.equals(item.name));
     }
