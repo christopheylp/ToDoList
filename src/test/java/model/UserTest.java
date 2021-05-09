@@ -1,12 +1,8 @@
 package model;
 
 import junit.framework.TestCase;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.mockito.runners.MockitoJUnitRunner;
+
 
 import java.time.LocalDate;
 
@@ -16,12 +12,6 @@ public class UserTest extends TestCase {
 
 
     User user = new User("abcaaaaaa@gmail.com", "Bob", "Joe", "12345678", LocalDate.now().minusYears(20));
-
-    @Before
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
-    User userMocked =  Mockito.mock(User.class);
 
 
     @Test
