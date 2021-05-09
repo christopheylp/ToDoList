@@ -9,9 +9,9 @@ import java.util.stream.IntStream;
 
 public class ItemTest extends TestCase {
 
-    User user = new User("abc@gmail.com", "Bob", "Joe", "123", LocalDate.now().minusYears(20));
+    User user = new User("abc@gmail.com", "Bob", "Joe", "123456789", LocalDate.now().minusYears(20));
     Item item = new Item("item1", "desc1");
-    TodoList todo = new TodoList(user);
+    TodoList todo = user.makeTodo("todo1");
 
 
     @Test

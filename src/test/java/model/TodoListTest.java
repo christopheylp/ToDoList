@@ -12,8 +12,9 @@ import static org.mockito.Mockito.when;
 public class TodoListTest extends TestCase {
 
     User user = new User("abc@gmail.com", "Bob", "Joe", "123456789",LocalDate.now().minusYears(20));
+    User userNoValid = new User("abcaaaaaa@gmail.com", "Bob", "Joe", "1", LocalDate.now().minusYears(20));
     Item item = new Item("item1", "desc1");
-    TodoList todo = new TodoList(user);
+    TodoList todo = user.makeTodo("todo1");
 
     private final TodoList todoListMocked = mock(TodoList.class);
 

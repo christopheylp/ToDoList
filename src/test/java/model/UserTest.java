@@ -10,23 +10,29 @@ import java.time.LocalDate;
 
 public class UserTest extends TestCase {
 
-
     User user = new User("abcaaaaaa@gmail.com", "Bob", "Joe", "12345678", LocalDate.now().minusYears(20));
-
+    User userNoValid = new User("abcaaaaa.gmail.com", "Bob", "Joe", "1", LocalDate.now().minusYears(8));
 
     @Test
     public void testIsValid() throws Exception{
         assertTrue(user.isValid());
     }
+
+    @Test
+    public void testIsValidWithUserNoValid() throws Exception{
+        assertFalse(userNoValid.isValid());
+    }
+
+    @Test
+    public void testPasswordIsValid(){
+        assertTrue(user.passwordIsValid());
+        assertFalse(userNoValid.passwordIsValid());
+    }
+
     @Test
     public void testEmailIsValid(){
         assertTrue(user.emailValid());
-    }
-    @Test
-    public void testEmailWithoutAtMark(){
-        //TODO user.email only
-        User user1 = new User("abc.gmail.com", "Bob", "Joe", "12345678", LocalDate.now().minusYears(20));
-        assertFalse(user1.emailValid());
+        assertFalse(userNoValid.emailValid());
     }
 
     @Test
@@ -50,16 +56,17 @@ public class UserTest extends TestCase {
     }
 
     @Test
-    public void testUserIsOlderThan13YearsOld() throws Exception{
-        assertTrue(user.birthdate.isBefore(LocalDate.now().minusYears(13)));
+    public void testUserAgeIsValid() throws Exception{
+        assertTrue(user.AgeIsValid());
+        assertFalse(userNoValid.AgeIsValid());
     }
 
-    @Test
-    public void testUserIsYoungerThan13YearsOld() throws Exception{
-        user.setBirthdate(LocalDate.now().minusYears(10));
-        assertFalse(user.birthdate.isBefore(LocalDate.now().minusYears(13)));
+    public void testMakeTodo() {
+        TodoList testTodo1 = user.makeTodo("todoValidTest");
+        TodoList testTodo2 = userNoValid.makeTodo("todo1");
+        assertTrue(testTodo1.name == "todoValidTest");
+        assertEquals(null,testTodo2);
     }
-
 }
 
 

@@ -1,7 +1,6 @@
 package model;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.regex.Pattern;
 
 public class User {
@@ -66,6 +65,14 @@ public class User {
 
     }
 
+    public boolean passwordIsValid(){
+        return this.password != null && this.password.length() <= 40 && this.password.length() >= 8 ;
+    }
+
+    public boolean AgeIsValid(){
+        return this.birthdate.isBefore(LocalDate.now().minusYears(13)) ;
+    }
+
     public Item getAssigned() {
         return assigned;
     }
@@ -78,8 +85,17 @@ public class User {
         //TODO check email regex
         return this.firstname != null &&
                 this.lastname != null &&
-                this.password != null && this.password.length() <= 40 && this.password.length() >= 8 &&
-                this.birthdate != null && this.birthdate.isBefore(LocalDate.now().minusYears(13)) &&
+                this.passwordIsValid() &&
+                this.birthdate != null && this.AgeIsValid() &&
                 this.email != null && this.emailValid();
     }
+
+    public TodoList makeTodo(String nameTodo){
+        if(this.isValid()){
+            TodoList newTodo = new TodoList(this, nameTodo);
+            return newTodo;
+        }
+        return null;
+    }
+
 }

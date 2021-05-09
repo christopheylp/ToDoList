@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import java.util.stream.IntStream;
 
 public class TodoList {
+    String name;
     ArrayList<Item> items;
     User admin;
     LocalDateTime lastInputItem = LocalDateTime.of(2021, 5, 8, 0, 0);    ;
 
-    public TodoList(User admin) {
-        if(admin.isValid()){
-            this.items = new ArrayList<Item>();
-            this.admin = admin;
-        }
-
+    public TodoList(User admin, String name) {
+        this.name = name;
+        this.items = new ArrayList<Item>();
+        this.admin = admin;
     }
 
     public boolean addItem(Item item){
