@@ -7,7 +7,7 @@ import javax.activation.*;
 
 public class EmailSenderService {
 
-    public static void sendEmail(String [] args) {
+    public static boolean sendEmail() {
         String to = "abcd@gmail.com";
 
         String from = "web@gmail.com";
@@ -33,8 +33,11 @@ public class EmailSenderService {
 
             // Send message
             Transport.send(message);
+
+            return true;
         } catch (MessagingException mex) {
             mex.printStackTrace();
+            return false;
         }
     }
 }

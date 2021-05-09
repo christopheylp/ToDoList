@@ -1,9 +1,7 @@
 package model;
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.stream.IntStream;
 
 public class TodoList {
@@ -17,6 +15,7 @@ public class TodoList {
     }
 
     public boolean addItem(Item item){
+        isThere8Items();
         if(this.items.size()>=10 || this.alreadyInTodo(item) || !this.verifyLastInputItem()){
             return false;
         }
@@ -34,5 +33,12 @@ public class TodoList {
         long diff = ChronoUnit.MINUTES.between(this.lastInputItem, newDate);
         return diff >= 30;
     }
+
+    public void isThere8Items(){
+        if( this.items.size() == 8){
+            EmailSenderService.sendEmail();
+        }
+    }
+
 
 }
