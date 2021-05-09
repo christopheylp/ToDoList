@@ -38,8 +38,9 @@ public class TodoListTest extends TestCase {
 
     @Test
     public void testAddMoreThan10Items(){
-
-        assertEquals(this.todo.items.size(),10);
+        //TODO add 10 items
+        this.todo.addItem(item);
+        assertTrue(todo.items.size() < 10);
     }
 
 

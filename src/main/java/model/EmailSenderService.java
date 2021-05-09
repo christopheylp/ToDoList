@@ -1,244 +1,40 @@
 package model;
 
-import javax.activation.DataHandler;
+import java.util.*;
 import javax.mail.*;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.Properties;
+import javax.mail.internet.*;
+import javax.activation.*;
 
 public class EmailSenderService {
 
-//TODO Send mail
-    public static void sendMail(String recepient){
-        Properties prop = new Properties();
-        prop.put("mail.smtp.auth", true);
-        prop.put("mail.smtp.starttls.enable", "true");
-        prop.put("mail.smtp.host", "smtp.gmail.com");
-        prop.put("mail.smtp.port", "587");
+    public static void sendEmail(String [] args) {
+        String to = "abcd@gmail.com";
 
+        String from = "web@gmail.com";
 
-        String AccountEmail = "x@gmail.com";
-        String password = "x";
+        String host = "localhost";
 
-        Session session = Session.getInstance(prop, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(AccountEmail,password);
-            }
-        });
+        Properties properties = System.getProperties();
 
-        Message message = new Message() {
-            @Override
-            public Address[] getFrom() throws MessagingException {
+        properties.setProperty("mail.smtp.host", host);
 
-                return new Address[0];
-            }
+        Session session = Session.getDefaultInstance(properties);
 
-            @Override
-            public void setFrom() throws MessagingException {
+        try {
+            MimeMessage message = new MimeMessage(session);
 
-            }
+            message.setFrom(new InternetAddress(from));
 
-            @Override
-            public void setFrom(Address address) throws MessagingException {
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
 
-            }
+            message.setSubject("To Do List limit almost reach!");
 
-            @Override
-            public void addFrom(Address[] addresses) throws MessagingException {
+            message.setText("You already have 8 items in your ToDoList, you can only add 10 items in total");
 
-            }
-
-            @Override
-            public Address[] getRecipients(RecipientType recipientType) throws MessagingException {
-                return new Address[0];
-            }
-
-            @Override
-            public void setRecipients(RecipientType recipientType, Address[] addresses) throws MessagingException {
-
-            }
-
-            @Override
-            public void addRecipients(RecipientType recipientType, Address[] addresses) throws MessagingException {
-
-            }
-
-            @Override
-            public String getSubject() throws MessagingException {
-                return null;
-            }
-
-            @Override
-            public void setSubject(String s) throws MessagingException {
-
-            }
-
-            @Override
-            public Date getSentDate() throws MessagingException {
-                return null;
-            }
-
-            @Override
-            public void setSentDate(Date date) throws MessagingException {
-
-            }
-
-            @Override
-            public Date getReceivedDate() throws MessagingException {
-                return null;
-            }
-
-            @Override
-            public Flags getFlags() throws MessagingException {
-                return null;
-            }
-
-            @Override
-            public void setFlags(Flags flags, boolean b) throws MessagingException {
-
-            }
-
-            @Override
-            public Message reply(boolean b) throws MessagingException {
-                return null;
-            }
-
-            @Override
-            public void saveChanges() throws MessagingException {
-
-            }
-
-            @Override
-            public int getSize() throws MessagingException {
-                return 0;
-            }
-
-            @Override
-            public int getLineCount() throws MessagingException {
-                return 0;
-            }
-
-            @Override
-            public String getContentType() throws MessagingException {
-                return null;
-            }
-
-            @Override
-            public boolean isMimeType(String s) throws MessagingException {
-                return false;
-            }
-
-            @Override
-            public String getDisposition() throws MessagingException {
-                return null;
-            }
-
-            @Override
-            public void setDisposition(String s) throws MessagingException {
-
-            }
-
-            @Override
-            public String getDescription() throws MessagingException {
-                return null;
-            }
-
-            @Override
-            public void setDescription(String s) throws MessagingException {
-
-            }
-
-            @Override
-            public String getFileName() throws MessagingException {
-                return null;
-            }
-
-            @Override
-            public void setFileName(String s) throws MessagingException {
-
-            }
-
-            @Override
-            public InputStream getInputStream() throws IOException, MessagingException {
-                return null;
-            }
-
-            @Override
-            public DataHandler getDataHandler() throws MessagingException {
-                return null;
-            }
-
-            @Override
-            public Object getContent() throws IOException, MessagingException {
-                return null;
-            }
-
-            @Override
-            public void setDataHandler(DataHandler dataHandler) throws MessagingException {
-
-            }
-
-            @Override
-            public void setContent(Object o, String s) throws MessagingException {
-
-            }
-
-            @Override
-            public void setText(String s) throws MessagingException {
-
-            }
-
-            @Override
-            public void setContent(Multipart multipart) throws MessagingException {
-
-            }
-
-            @Override
-            public void writeTo(OutputStream outputStream) throws IOException, MessagingException {
-
-            }
-
-            @Override
-            public String[] getHeader(String s) throws MessagingException {
-                return new String[0];
-            }
-
-            @Override
-            public void setHeader(String s, String s1) throws MessagingException {
-
-            }
-
-            @Override
-            public void addHeader(String s, String s1) throws MessagingException {
-
-            }
-
-            @Override
-            public void removeHeader(String s) throws MessagingException {
-
-            }
-
-            @Override
-            public Enumeration getAllHeaders() throws MessagingException {
-                return null;
-            }
-
-            @Override
-            public Enumeration getMatchingHeaders(String[] strings) throws MessagingException {
-                return null;
-            }
-
-            @Override
-            public Enumeration getNonMatchingHeaders(String[] strings) throws MessagingException {
-                return null;
-            }
-        };
+            // Send message
+            Transport.send(message);
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+        }
     }
-
 }
-
-

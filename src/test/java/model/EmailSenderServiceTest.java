@@ -6,8 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EmailSenderServiceTest {
 
-    @Test
-    void sendMail() {
+    //TODO write at least one unit test
 
-    }
 }

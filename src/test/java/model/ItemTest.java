@@ -3,6 +3,8 @@ package model;
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public class ItemTest extends TestCase {
@@ -32,8 +34,7 @@ public class ItemTest extends TestCase {
 
     @Test
     public void testContentIsLessThan1000(){
-        String str = "";
-        for(int i=0; i<1200;i++) str += "a";
+        String str = IntStream.range(0, 1200).mapToObj(i -> "a").collect(Collectors.joining());
         Item itemTest = new Item("item1", str);
         assertTrue(str.length() > 1000);
         assertTrue(itemTest.content.length() <= 1000);
