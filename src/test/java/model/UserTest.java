@@ -15,7 +15,7 @@ public class UserTest extends TestCase {
 
     @Test
     public void testIsValid() throws Exception{
-        assertTrue(userNoValid.isValid());
+        assertTrue(user.isValid());
     }
 
     @Test
