@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 public class User {
+    int userid;
     String email;
     String lastname;
     String firstname;
@@ -93,10 +94,12 @@ public class User {
 
     public TodoList makeTodo(String nameTodo){
         if(this.isValid()){
-            TodoList newTodo = new TodoList(this, nameTodo);
-            return newTodo;
+            return new TodoList(this, nameTodo);
         }
         return null;
     }
 
+    public int getUserid() {
+        return this.userid;
+    }
 }

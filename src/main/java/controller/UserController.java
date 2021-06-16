@@ -1,32 +1,37 @@
 package controller;
 
 import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import repository.UserRepository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-public class UserController {
-    @GetMapping("/user")
-    public User user( @RequestParam(value = "email") String email,
-                      @RequestParam(value = "lastname") String lastname,
-                      @RequestParam(value = "firstname") String firstname,
-                      @RequestParam(value = "password") String password,
-                      @RequestParam(value = "birthdate")
-                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate birthdate)
+@RestController
+public class UserController
+{
 
+    @Autowired
+    private UserRepository userRepository;
 
-    //@RequestParam("localDate") LocalDate birthdate)
-    {
-        return new User(String.format(email, email),
-                String.format(lastname, lastname),
-                String.format(firstname,firstname),
-                String.format(password,password),
-                birthdate
+    @RequestMapping("/")
+    @ResponseBody
+    public String welcome() {
+        return "Welcome to RestTemplate Example.";
+    }
 
-
-        );
+    @RequestMapping(value = "/users", //
+            method = RequestMethod.GET, //
+            produces = { MediaType.APPLICATION_JSON_VALUE, //
+                    MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+    public List<User> getUsers() {
+        return userRepository.getAllUsers();
     }
 }
 
