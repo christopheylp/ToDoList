@@ -38,7 +38,7 @@ public class UserRepository {
         userList.remove(nbUser);
     }
 
-    public List<User> getAllUsers() {
+    public ArrayList<User> getAllUsers() {
         return userList;
     }
 
