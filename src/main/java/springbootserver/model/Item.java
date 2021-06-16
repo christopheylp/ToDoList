@@ -1,9 +1,9 @@
-package model;
+package springbootserver.model;
 
 public class Item {
-    String name;
-    String content;
-    User assigned;
+    public String name;
+    public String content;
+    public User assigned;
 
     public Item(String name, String content) {
         this.name = name;

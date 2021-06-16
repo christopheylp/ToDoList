@@ -1,4 +1,4 @@
-package model;
+package springbootserver.model;
 
 public class EmailSenderService {
 

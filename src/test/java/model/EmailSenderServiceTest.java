@@ -1,7 +1,10 @@
 package model;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import springbootserver.model.EmailSenderService;
+import springbootserver.model.Item;
+import springbootserver.model.TodoList;
+import springbootserver.model.User;
 
 import java.time.LocalDate;
 

@@ -2,6 +2,8 @@ package model;
 
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
+import springbootserver.model.TodoList;
+import springbootserver.model.User;
 
 
 import java.time.LocalDate;

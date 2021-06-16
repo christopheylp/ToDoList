@@ -1,17 +1,17 @@
 //TEST Github Actions
-package model;
+package springbootserver.model;
 
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 public class User {
-    int userid;
-    String email;
-    String lastname;
-    String firstname;
-    String password;
-    LocalDate birthdate;
-    Item assigned;
+    public int userid;
+    public String email;
+    public String lastname;
+    public String firstname;
+    public String password;
+    public LocalDate birthdate;
+    public Item assigned;
 
     public User(String email, String lastname, String firstname, String password, LocalDate birthdate) {
         this.email = email;

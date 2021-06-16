@@ -2,6 +2,10 @@ package model;
 
 import junit.framework.TestCase;
 import org.junit.jupiter.api.Test;
+import springbootserver.model.Item;
+import springbootserver.model.TodoList;
+import springbootserver.model.User;
+
 import java.time.LocalDate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;

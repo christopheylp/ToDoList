@@ -1,15 +1,11 @@
-package controller;
+package springbootserver.controller;
 
-import model.User;
+import springbootserver.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import repository.UserRepository;
+import springbootserver.repository.UserRepository;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
