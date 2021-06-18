@@ -1,5 +1,6 @@
 package springbootserver.repository;
 
+import springbootserver.model.Item;
 import springbootserver.model.TodoList;
 import springbootserver.model.User;
 import org.springframework.stereotype.Repository;
@@ -10,7 +11,7 @@ import java.util.*;
 @Repository
 public class TodoListRepository {
 
-    private static final ArrayList<TodoList> todoLists = new ArrayList<>();
+    private static final ArrayList<TodoList> todoList = new ArrayList<>();
 
     static {
         initTodo();
@@ -21,31 +22,33 @@ public class TodoListRepository {
         TodoList todo1 = new TodoList(user, "todo1");
         TodoList todo2 = new TodoList(user, "todo2");
         TodoList todo3 = new TodoList(user, "todo3");
-        todoLists.add(todo1);
-        todoLists.add(todo2);
-        todoLists.add(todo3);
+        todoList.add(todo1);
+        todoList.add(todo2);
+        todoList.add(todo3);
     }
 
     public TodoList getTodoList(int No) {
-        return todoLists.get(No - 1);
+        return todoList.get(No - 1);
     }
 
     public TodoList addTodoList(TodoList todo) {
-        todoLists.add(todo);
+        todoList.add(todo);
         return todo;
     }
 
     public TodoList updateTodoList(int numTodo, TodoList todo) {
-        todoLists.set(numTodo, todo);
+        todoList.set(numTodo, todo);
         return todo;
     }
 
     public TodoList deleteTodoList(int nb) {
-        return todoLists.remove(nb);
+        return todoList.remove(nb);
     }
 
     public ArrayList<TodoList> getAllTodoLists() {
-        return todoLists;
+        return todoList;
     }
+
+
 
 }

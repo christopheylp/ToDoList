@@ -1,9 +1,11 @@
 package springbootserver.controller;
 
+import springbootserver.model.Item;
 import springbootserver.model.TodoList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import springbootserver.repository.ItemRepository;
 import springbootserver.repository.TodoListRepository;
 
 import java.util.ArrayList;
@@ -14,7 +16,8 @@ public class TodoListController
 
     @Autowired
     private TodoListRepository todoListRepository;
-
+    @Autowired
+    private ItemRepository itemRepository;
 
     @RequestMapping("/")
     @ResponseBody
@@ -70,6 +73,48 @@ public class TodoListController
     @ResponseBody
     public TodoList deleteTodoList(@PathVariable("No") int nb) {
         return todoListRepository.deleteTodoList(nb-1);
+    }
+
+    // GET routes qui permet de retourner tout les items
+    @RequestMapping(value = "/items", //
+            method = RequestMethod.GET, //
+            produces = { MediaType.APPLICATION_JSON_VALUE, //
+                    MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+    public ArrayList<Item> getAllItems() {
+        return itemRepository.getAllItems();
+    }
+
+
+    // GET routes qui permet de retourner un item grace a sa position
+    @RequestMapping(value = "/items/{No}", //
+            method = RequestMethod.GET, //
+            produces = { MediaType.APPLICATION_JSON_VALUE, //
+                    MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+    public Item getItem(@PathVariable("No") int nb) {
+        return itemRepository.getItem(nb);
+    }
+
+
+    // PUT routes qui permet d'ajouter un item a une todolist'
+    @RequestMapping(value = "/items/inTodo/{No}", //
+            method = RequestMethod.POST, //
+            produces = { MediaType.APPLICATION_JSON_VALUE, //
+                    MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+    public TodoList addItemInTodo(@PathVariable("No") int indexTodo, @RequestBody Item item) {
+        return itemRepository.addItemInTodo(todoListRepository.getTodoList(indexTodo),item);
+    }
+
+    // DELETE routes qui permet de supprimer une todolist TODO
+    @RequestMapping(value = "/items/inTodo/{No}", //
+            method = RequestMethod.DELETE, //
+            produces = { MediaType.APPLICATION_JSON_VALUE, //
+                    MediaType.APPLICATION_XML_VALUE })
+    @ResponseBody
+    public TodoList deleteItemInTodo(@PathVariable("No") int indexTodo, @RequestBody Item item) {
+        return itemRepository.deleteItemInTodo(todoListRepository.getTodoList(indexTodo),item);
     }
 }
 

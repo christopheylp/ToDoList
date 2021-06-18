@@ -8,11 +8,11 @@ public class TodoList {
     public String name;
     public ArrayList<Item> items;
     public User admin;
-    public LocalDateTime lastInputItem = LocalDateTime.of(2021, 5, 8, 0, 0);    ;
+    public LocalDateTime lastInputItem = LocalDateTime.of(2021, 5, 8, 0, 0);
 
     public TodoList(User admin, String name) {
         this.name = name;
-        this.items = new ArrayList<Item>();
+        this.items = new ArrayList<>();
         this.admin = admin;
     }
 
@@ -22,6 +22,12 @@ public class TodoList {
             return false;
         }
         this.items.add(item);
+        this.lastInputItem = LocalDateTime.now();
+        return true;
+    }
+
+    public boolean deleteItem(Item item){
+        this.items.remove(item);
         this.lastInputItem = LocalDateTime.now();
         return true;
     }
