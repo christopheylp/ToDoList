@@ -108,13 +108,13 @@ public class TodoListController
     }
 
     // DELETE routes qui permet de supprimer une todolist TODO
-    @RequestMapping(value = "/items/inTodo/{No}", //
+    @RequestMapping(value = "/items/inTodo/{indexTodo}/{indexItem}", //
             method = RequestMethod.DELETE, //
             produces = { MediaType.APPLICATION_JSON_VALUE, //
                     MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
-    public TodoList deleteItemInTodo(@PathVariable("No") int indexTodo, @RequestBody Item item) {
-        return itemRepository.deleteItemInTodo(todoListRepository.getTodoList(indexTodo),item);
+    public TodoList deleteItemInTodo(@PathVariable("indexTodo") int indexTodo, @PathVariable("indexItem") int indexItem) {
+        return itemRepository.deleteItemInTodo(todoListRepository.getTodoList(indexTodo),indexItem-1);
     }
 }
 

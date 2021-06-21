@@ -26,8 +26,8 @@ public class TodoList {
         return true;
     }
 
-    public boolean deleteItem(Item item){
-        this.items.remove(item);
+    public boolean deleteItem(int index){
+        this.items.remove(index);
         this.lastInputItem = LocalDateTime.now();
         return true;
     }

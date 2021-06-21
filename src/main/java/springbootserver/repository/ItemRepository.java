@@ -54,8 +54,8 @@ public class ItemRepository {
         return todo;
     }
 
-    public TodoList deleteItemInTodo(TodoList todo, Item item) {
-        todo.deleteItem(item);
+    public TodoList deleteItemInTodo(TodoList todo, int indexItemInTodo) {
+        todo.deleteItem(indexItemInTodo);
         return todo;
     }
 }
