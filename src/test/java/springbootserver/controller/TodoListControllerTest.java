@@ -9,10 +9,15 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import springbootserver.repository.TodoListRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.junit.Assert;
 
 
 @RunWith(SpringRunner.class)
@@ -35,11 +40,19 @@ class TodoListControllerTest {
     @Test
     void getTodoLists() throws Exception {
 
+        mvc.perform(MockMvcRequestBuilders.get("/todos"))
+                .andExpect(status().isOk());
     }
 
 
     @Test
-    public void addTodoList() {}
+    public void addTodoList() throws Exception {
+
+        mvc.perform(MockMvcRequestBuilders.post("/todos"))
+                .andExpect(status().isCreated());
+
+
+    }
 
 
     @Test
