@@ -12,9 +12,7 @@ import java.util.List;
 @RestController
 public class UserController
 {
-
-    @Autowired
-    private UserRepository userRepository;
+    public UserRepository userRepository;
 
     @RequestMapping(value = "/users", //
             method = RequestMethod.GET, //

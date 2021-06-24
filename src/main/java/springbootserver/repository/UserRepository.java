@@ -9,13 +9,13 @@ import java.util.*;
 @Repository
 public class UserRepository {
 
-    private static final ArrayList<User> userList = new ArrayList<>();
+    public static final ArrayList<User> userList = new ArrayList<>();
 
     static {
         initUsers();
     }
 
-    private static void initUsers() {
+    public static void initUsers() {
         User user1 = new User("abc@gmail.com", "Bob", "Joe", "123456789", LocalDate.now().minusYears(20));
         userList.add(user1);
     }

@@ -13,6 +13,13 @@ public class User {
     public LocalDate birthdate;
     public Item assigned;
 
+    public User(String email) {
+        this.email = email;
+        this.lastname = null;
+        this.firstname = null;
+        this.password = null;
+        this.birthdate = null;
+    }
 
     public User(String email, String lastname, String firstname, String password, LocalDate birthdate) {
         this.email = email;

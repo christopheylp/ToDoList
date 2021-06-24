@@ -1,5 +1,6 @@
 package springbootserver.repository;
 
+import org.springframework.stereotype.Service;
 import springbootserver.model.Item;
 import springbootserver.model.TodoList;
 import springbootserver.model.User;
@@ -8,27 +9,21 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.*;
 
-@Repository
+@Repository @Service
 public class TodoListRepository {
 
-    private static final ArrayList<TodoList> todoList = new ArrayList<>();
+    public ArrayList<TodoList> todoList = new ArrayList<>();
 
-    static {
-        initTodo();
-    }
-
-    private static void initTodo() {
+    public TodoListRepository() {
         User user = new User("abc@gmail.com", "Bob", "Joe", "123456789", LocalDate.now().minusYears(20));
         TodoList todo1 = new TodoList(user, "todo1");
-        TodoList todo2 = new TodoList(user, "todo2");
-        TodoList todo3 = new TodoList(user, "todo3");
         todoList.add(todo1);
+        TodoList todo2 = new TodoList(user, "todo2");
         todoList.add(todo2);
-        todoList.add(todo3);
     }
 
     public TodoList getTodoList(int No) {
-        return todoList.get(No - 1);
+        return todoList.get(No);
     }
 
     public TodoList addTodoList(TodoList todo) {

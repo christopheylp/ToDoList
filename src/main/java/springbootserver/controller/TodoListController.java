@@ -1,5 +1,6 @@
 package springbootserver.controller;
 
+import org.springframework.stereotype.Service;
 import springbootserver.model.Item;
 import springbootserver.model.TodoList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +12,12 @@ import springbootserver.repository.TodoListRepository;
 import java.util.ArrayList;
 
 @RestController
+@Service
 public class TodoListController
 {
+    public TodoListRepository todoListRepository = new TodoListRepository();
 
-    @Autowired
-    private TodoListRepository todoListRepository;
-    @Autowired
-    private ItemRepository itemRepository;
+    public ItemRepository itemRepository;
 
     @RequestMapping("/")
     @ResponseBody
@@ -62,7 +62,7 @@ public class TodoListController
                     MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     public TodoList updateTodoList(@PathVariable("No") int nb,@RequestBody TodoList todo) {
-        return todoListRepository.updateTodoList(nb-1,todo);
+        return todoListRepository.updateTodoList(nb,todo);
     }
 
     // DELETE routes qui permet de supprimer une todolist
@@ -72,7 +72,7 @@ public class TodoListController
                     MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     public TodoList deleteTodoList(@PathVariable("No") int nb) {
-        return todoListRepository.deleteTodoList(nb-1);
+        return todoListRepository.deleteTodoList(nb);
     }
 
     // GET routes qui permet de retourner tout les items
@@ -114,7 +114,7 @@ public class TodoListController
                     MediaType.APPLICATION_XML_VALUE })
     @ResponseBody
     public TodoList deleteItemInTodo(@PathVariable("indexTodo") int indexTodo, @PathVariable("indexItem") int indexItem) {
-        return itemRepository.deleteItemInTodo(todoListRepository.getTodoList(indexTodo),indexItem-1);
+        return itemRepository.deleteItemInTodo(todoListRepository.getTodoList(indexTodo),indexItem);
     }
 }
 
