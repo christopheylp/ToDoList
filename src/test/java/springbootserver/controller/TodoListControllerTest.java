@@ -83,9 +83,8 @@ public class TodoListControllerTest{
         Mockito.when(todoListRepository.deleteTodoList(0)).thenReturn(todoList.remove(0));
 
         mockMvc.perform(delete("/todos/0"))
-                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", Matchers.equalTo("todo1")))
-                .andExpect(status().isOk()).andReturn();
+                .andExpect(status().is(204)).andReturn();
     }
 
     @Test
