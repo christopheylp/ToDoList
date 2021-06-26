@@ -1,36 +1,26 @@
 package springbootserver.controller;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
-import org.junit.After;
-import org.junit.jupiter.api.*;
-import org.mockito.ArgumentMatchers;
-import org.mockito.Mock;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import springbootserver.model.Item;
 import springbootserver.model.TodoList;
 import springbootserver.model.User;
 import springbootserver.repository.ItemRepository;
 import springbootserver.repository.TodoListRepository;
-import springbootserver.repository.UserRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -42,6 +32,9 @@ public class TodoListControllerTest{
 
     @MockBean
     public TodoListRepository todoListRepository;
+
+    @MockBean
+    public ItemRepository itemRepository;
 
     public static ObjectMapper mapper = new ObjectMapper();
 

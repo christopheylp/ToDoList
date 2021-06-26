@@ -16,8 +16,10 @@ import java.util.ArrayList;
 @Service
 public class TodoListController
 {
+    @Autowired
     public TodoListRepository todoListRepository = new TodoListRepository();
 
+    @Autowired
     public ItemRepository itemRepository;
 
     @RequestMapping("/")

@@ -1,6 +1,7 @@
 package springbootserver.repository;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import springbootserver.model.Item;
 import springbootserver.model.TodoList;
 import springbootserver.model.User;
@@ -8,16 +9,12 @@ import springbootserver.model.User;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-@Repository
+@Repository @Service
 public class ItemRepository {
 
     private static final ArrayList<Item> itemsList = new ArrayList<>();
 
-    static {
-        initItems();
-    }
-
-    private static void initItems() {
+    private static void ItemRepository() {
         Item item1 = new Item("item1", "desc1");
         Item item2 = new Item("item2", "desc2");
         Item item3 = new Item("item3", "desc3");
