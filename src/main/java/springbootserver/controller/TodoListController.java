@@ -1,5 +1,6 @@
 package springbootserver.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import springbootserver.model.Item;
 import springbootserver.model.TodoList;
@@ -46,6 +47,7 @@ public class TodoListController
     }
 
     // POST routes qui permet de créer une todolist
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/todos", //
             method = RequestMethod.POST, //
             produces = { MediaType.APPLICATION_JSON_VALUE, //
@@ -56,6 +58,7 @@ public class TodoListController
     }
 
     // PUT routes qui permet de modifier une todolist
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/todos/{No}", //
             method = RequestMethod.PUT, //
             produces = { MediaType.APPLICATION_JSON_VALUE, //
@@ -66,6 +69,7 @@ public class TodoListController
     }
 
     // DELETE routes qui permet de supprimer une todolist
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(value = "/todos/{No}", //
             method = RequestMethod.DELETE, //
             produces = { MediaType.APPLICATION_JSON_VALUE, //
@@ -98,6 +102,7 @@ public class TodoListController
 
 
     // PUT routes qui permet d'ajouter un item a une todolist'
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/items/inTodo/{No}", //
             method = RequestMethod.POST, //
             produces = { MediaType.APPLICATION_JSON_VALUE, //
