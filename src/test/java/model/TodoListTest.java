@@ -22,6 +22,7 @@ public class TodoListTest extends TestCase {
 
     private final TodoList todoListMocked = mock(TodoList.class);
 
+    
     @Test
     public void testAddItem() {
         this.todo.addItemWithoutTime(item);
