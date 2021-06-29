@@ -8,7 +8,7 @@ public class TodoList {
     public String name;
     public ArrayList<Item> items;
     public User admin;
-    public LocalDateTime lastInputItem = LocalDateTime.of(2021, 5, 8, 0, 0);
+    public LocalDateTime lastInputItem = LocalDateTime.now().minusMinutes(30);
 
     public TodoList(User admin, String name) {
         this.name = name;
