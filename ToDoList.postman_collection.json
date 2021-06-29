@@ -1,0 +1,600 @@
+{
+	"info": {
+		"_postman_id": "71c1ec11-7943-434b-8b0b-9f90bf5295e7",
+		"name": "ToDoList",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CRUD",
+			"item": [
+				{
+					"name": "Create a ToDoList",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.response.to.have.status(201)",
+									"});",
+									"",
+									"",
+									"var reqbodJ = JSON.parse(pm.collectionVariables.get(\"req_body\"));",
+									"",
+									"",
+									"var jsonData = pm.response.json();",
+									"",
+									"pm.test(\"Named well\", function () {",
+									"    pm.expect(jsonData.name).to.eql(reqbodJ.name);",
+									"});",
+									"",
+									"tests[\"Body matches string\"] = responseBody.has(reqbodJ.name);",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									"pm.sendRequest('http://localhost:8080/todos', (error, response) => {",
+									"  if (error) {",
+									"    console.log(error);",
+									"  } else {",
+									"",
+									"      pm.globals.set(\"initial_size\", response.json().length);",
+									"  }",
+									"});",
+									"    ",
+									"",
+									"",
+									"",
+									"var body = ",
+									"  {",
+									"    \"name\": \"todoChris\",",
+									"    \"items\": [],",
+									"    \"admin\": {",
+									"        \"userid\": 0,",
+									"        \"email\": \"abc@gmail.com\",",
+									"        \"lastname\": \"Bob\",",
+									"        \"firstname\": \"Joe\",",
+									"        \"password\": \"123456789\",",
+									"        \"birthdate\": \"2001-06-17\",",
+									"        \"assigned\": null,",
+									"        \"valid\": true",
+									"    },",
+									"    \"lastInputItem\": \"2021-05-08T00:00:00\",",
+									"    \"there8Items\": false",
+									"    }; ",
+									"",
+									"pm.collectionVariables.set('req_body', JSON.stringify(body));",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{req_body}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read All TodoList",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Check that it returns an array\", function () {",
+									"  var jsonData = pm.response.json();",
+									"  pm.expect(jsonData).to.be.an(\"array\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read a specific ToDoList",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response not empty\", function() {",
+									"    pm.expect(pm.response.json()).not.equal(null);",
+									"});",
+									"",
+									"//TODO",
+									"pm.test(\"Response contain only one item\", function(){",
+									"    pm.expect(Object.keys(pm.response.json())).to.have.lengthOf(5);",
+									"});",
+									"",
+									"const responseJson = pm.response.json();",
+									"",
+									"var count = Object.keys(responseJson).length;",
+									"",
+									"console.log(count)",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/todos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"todos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a ToDoList",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"var reqbodyUPD = JSON.parse(pm.collectionVariables.get(\"req_body_upd\"));",
+									"",
+									"pm.test(\"Update todolist name\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql(reqbodyUPD.name);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"var body_upd = ",
+									"  {",
+									"    \"name\": \"ToDoIsaac\",",
+									"}; ",
+									"",
+									"pm.collectionVariables.set('req_body_upd', JSON.stringify(body_upd));",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{req_body_upd}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/todos/1?name=isaac",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"todos",
+								"1"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "isaac"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a ToDoList",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/todos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"todos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ToDoList",
+			"item": [
+				{
+					"name": "Add Item in a ToDoList",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Test items is an array\", function() {",
+									"    pm.expect(pm.response.json().items).to.be.an(\"array\");",
+									"});",
+									"",
+									"let req_body_item = JSON.parse(pm.collectionVariables.get(\"req_body_item_in_todo\"));",
+									"",
+									"let jsonData = pm.response.json()",
+									"",
+									"const itemsName = jsonData.items.find(m => m.type === \"item470\");",
+									"",
+									"pm.test(\"Test items was added\", function() {",
+									"    pm.expect(pm.response.json().items[0]).to.have.property(\"name\");",
+									"    pm.expect(pm.response.json().items[0].name).to.equal(req_body_item.name);",
+									"//TODO Loop over items",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var body_item = ",
+									"  {",
+									"    \"name\": \"item470\",",
+									"    \"content\": \"desc1\",",
+									"    \"assigned\": null",
+									"    }; ",
+									"",
+									"pm.collectionVariables.set('req_body_item_in_todo', JSON.stringify(body_item));",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{req_body_item_in_todo}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/items/inTodo/0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								"inTodo",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item in Todo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"item1\",\r\n    \"content\": \"desc1\",\r\n    \"assigned\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/items/inTodo/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								"inTodo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Item",
+			"item": [
+				{
+					"name": "Create an Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var reqbodJItem = JSON.parse(pm.collectionVariables.get(\"req_body_item\"));",
+									"",
+									"",
+									"pm.test(\"Named well\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.name).to.eql(reqbodJItem.name);",
+									"});",
+									"",
+									"tests[\"Body matches string\"] = responseBody.has(reqbodJItem.name);",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"",
+									"",
+									"",
+									"var body_item = ",
+									"  {",
+									"        \"name\": \"item1\",",
+									"        \"content\": \"desc1\",",
+									"        \"assigned\": null",
+									"    }",
+									"",
+									"pm.collectionVariables.set('req_body_item', JSON.stringify(body_item));",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{req_body_item}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/todos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"todos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read All Items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/items/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"items",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "variable_key",
+			"value": ""
+		},
+		{
+			"key": "req_body",
+			"value": ""
+		},
+		{
+			"key": "size_after_req",
+			"value": ""
+		},
+		{
+			"key": "req_body_item",
+			"value": ""
+		},
+		{
+			"key": "req_body_upd",
+			"value": ""
+		},
+		{
+			"key": "req_body_item_in_todo",
+			"value": ""
+		}
+	]
+}
