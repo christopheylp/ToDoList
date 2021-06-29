@@ -66,10 +66,11 @@ public class UserTest extends TestCase {
     public void testMakeTodo() {
         TodoList testTodo1 = user.makeTodo("todoValidTest");
         TodoList testTodo2 = userNoValid.makeTodo("todo1");
-        assertTrue(testTodo1.name == "todoValidTest");
-        assertEquals(null,testTodo2);
+        assertEquals("todoValidTest", testTodo1.name);
+        assertNull(testTodo2);
     }
 }
+
 
 
 
