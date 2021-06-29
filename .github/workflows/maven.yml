@@ -1,39 +1,41 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
-name: Java CI with Maven
-
+name: Test-Build
 on:
   push:
-    branches: [ dev ]
-  pull_request:
-    branches: [ dev ]
-
+    branches:
+      - master
 jobs:
-  newman:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@master
-        - uses: matt-ball/newman-action@master
-          with:
-            apiKey: PMAK-60dadb437e3ccc003fbfa9a7-cdece3db3bed1232b967b31281069717de
-            collection: 71c1ec11-7943-434b-8b0b-9f90bf5295e7
-            environment: 71c1ec11-7943-434b-8b0b-9f90bf5295e7
-
-  build:
-
+  test-api:
     runs-on: ubuntu-latest
-
     steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v2
-      with:
-        java-version: '11'
-        distribution: 'adopt'
-    - name: Build with Maven
-      run: mvn -B package --file pom.xml
-   
-        
+      
+    # INstall Node on the runner
+    - name: Install Node
+      uses: actions/setup-node@v1
+      with: 
+        node-version: '12.x'
+    
+    # Install the newman command line utility and also install the html extra reporter
+    - name: Install newman
+      run: |
+       npm install -g newman
+       npm install -g newman-reporter-htmlextra
 
-  
+    # Make directory to upload the test results
+    - name: Make Directory for results
+      run: mkdir -p testResults
+
+
+    # Run the POSTMAN collection
+    - name: Run POSTMAN collection
+      run: |
+       newman run ToDoList.postman_collection.json -e ToDoList.postman_collection.json -r htmlextra --reporter-htmlextra-export testResults/htmlreport.html --reporter-htmlextra-darkTheme  > testResults/runreport1.html
+
+    # Upload the contents of Test Results directory to workspace
+    - name: Output the run Details
+      uses: actions/upload-artifact@v2
+      with: 
+       name: RunReports
+       path: testResults
+     
