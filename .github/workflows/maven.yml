@@ -30,7 +30,7 @@ jobs:
     # Run the POSTMAN collection
     - name: Run POSTMAN collection
       run: |
-       newman run ToDoList.postman_collection.json -e -k ToDoList.postman_collection.json -r -k
+       newman run ToDoList.postman_collection.json -k ToDoList.postman_collection.json -k
 
     # Upload the contents of Test Results directory to workspace
     - name: Output the run Details
